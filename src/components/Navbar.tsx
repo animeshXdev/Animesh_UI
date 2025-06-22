@@ -17,6 +17,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils"; // Optional helper if you're using clsx + tailwind-merge
+import { ModeToggle } from "./ModeToggle";
 
 export function NavbarDemo() {
   const pathname = usePathname();
@@ -30,7 +31,7 @@ export function NavbarDemo() {
   ];
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full mt-2">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
@@ -44,7 +45,9 @@ export function NavbarDemo() {
                   href={item.link}
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary",
-                    isActive ? "text-primary underline underline-offset-4" : "text-muted-foreground"
+                    isActive
+                      ? "text-primary underline underline-offset-4"
+                      : "text-muted-foreground"
                   )}
                 >
                   {item.name}
@@ -52,9 +55,8 @@ export function NavbarDemo() {
               );
             })}
           </div>
-          <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+          <div className="hidden md:flex items-center gap-4">
+            <ModeToggle />
           </div>
         </NavBody>
 
@@ -81,7 +83,9 @@ export function NavbarDemo() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
                     "block py-2 text-lg transition-colors",
-                    isActive ? "text-primary font-semibold underline underline-offset-4" : "text-muted-foreground"
+                    isActive
+                      ? "text-primary font-semibold underline underline-offset-4"
+                      : "text-muted-foreground"
                   )}
                 >
                   {item.name}
@@ -108,6 +112,11 @@ export function NavbarDemo() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
+
+      {/* Floating ModeToggle on Mobile */}
+      <div className="fixed bottom-4 right-4 z-50 md:hidden border-2 rounded-lg dark:border-white border-black">
+       <ModeToggle />
+      </div>
     </div>
   );
 }
