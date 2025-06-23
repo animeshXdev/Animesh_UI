@@ -31,7 +31,7 @@ export function NavbarDemo() {
   ];
 
   return (
-    <div className="relative w-full mt-2">
+    <div className="sticky top-5 z-50  w-full mt-2">
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
